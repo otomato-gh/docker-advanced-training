@@ -1,0 +1,10 @@
+version: '2'
+services:  
+  node1:
+    image: mynetbox
+    ports:
+      - 1234
+  node2:
+    image: mynetbox
+    ports: 
+      - 1234
