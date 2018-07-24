@@ -32,7 +32,6 @@ def hello_world():
 
 @app.route('/change', methods=['POST', 'GET'])
 def add_change():
-
     form = ReusableForm(request.form)
     placeholder = uuid.uuid1().hex
     if request.method == 'POST':
