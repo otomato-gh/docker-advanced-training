@@ -1,0 +1,74 @@
+{% extends "bootstrap/base.html" %}
+{% block metas %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
+{% block styles %}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+{% endblock %}
+{% block scripts %}
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+{% endblock %}
+{% block title %}Oto Change Tracking App{% endblock %}
+{% block content %}
+
+
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">All Changes</a>
+            <a class="navbar-brand" href="change">Add Change</a>
+        </div>
+    </div>
+</nav>
+
+
+
+<div class="container">
+
+
+  <h2>Add change</h2>
+  <form  action="" method="post" role="form">
+    {{ form.csrf }}
+    <div class="form-group">
+      <label for="commit">Commit:</label>
+      <input type="text" class="form-control" id="commit" name="commit" placeholder={{ placeholder }}>
+      <label for="cmessage">Message:</label>
+      <input type="text" class="form-control" id="cmessage" name="cmessage" placeholder="My message">
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+
+  <br>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+
+      {% for message in messages %}
+        {% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+                <strong>Success! </strong> {{ message[1] }}
+                </div>
+        {% endif %}
+
+        {% if "Error" in message[1]: %}
+            <div class="alert alert-warning">
+            {{ message[1] }}
+            </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+</div>
+  {% endblock %}
