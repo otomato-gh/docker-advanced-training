@@ -35,23 +35,19 @@ def add_change():
 
     form = ReusableForm(request.form)
     placeholder = uuid.uuid1().hex
-    app.logger.info(form.errors)
-    app.logger.info(form.validate())
-    app.logger.info('before eval')
     if request.method == 'POST':
-        app.logger.info ("got post in add")
         commit=request.form['commit']
         cmessage=request.form['cmessage']
         app.logger.info ("commit : %s, mesage: %s", commit, cmessage )
         if form.validate():
-          app.logger.info ("form val" )
+          app.logger.info ("form validated" )
           change = mongo.db.changes
           change_id = change.insert({'commit': commit, 'cmessage': cmessage})
           new_change = change.find_one({'_id': change_id })
           output = {'commit' : new_change['commit'], 'cmessage' : new_change['cmessage']}
           return redirect(url_for('get_all_changes'))
         else:
-          app.logger.info (form.errors )
+          app.logger.error (form.errors )
           flash('Error: ' + str(form.errors))
 
     return render_template('form.html', form=form, placeholder=placeholder)
@@ -66,4 +62,4 @@ def get_all_changes():
         changes=changes
     )
 
-app.run(host='0.0.0.0', port='80', debug=True)
+app.run(host='0.0.0.0', port='5000', debug=True)
