@@ -1,0 +1,11 @@
+version: '2'
+services:
+  changes:
+#    image: summary_changes
+    build: .
+    ports:
+      - 8080:5000
+  mongo:
+    image: mongo
+    ports:
+      - 27017
