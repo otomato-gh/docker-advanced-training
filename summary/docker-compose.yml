@@ -8,6 +8,11 @@ services:
     networks:
       - front
       - back
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100k"
+        max-file: "3"
   mongo:
     image: mongo
     ports:
@@ -15,5 +20,5 @@ services:
     networks:
       - back
 networks:
-    - front
-    - back
+  front:
+  back:
