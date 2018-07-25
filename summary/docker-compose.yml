@@ -1,11 +1,19 @@
 version: '2'
 services:
-  changes:
+  app:
 #    image: summary_changes
     build: .
     ports:
       - 8080:5000
+    networks:
+      - front
+      - back
   mongo:
     image: mongo
     ports:
       - 27017
+    networks:
+      - back
+networks:
+    - front
+    - back
